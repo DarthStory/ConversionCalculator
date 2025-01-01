@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ConversionCalculator</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="celsius">Celsius</string>
+    <string name="degrees">Degrees</string>
+    <string name="convert">Convert</string>
+</resources>

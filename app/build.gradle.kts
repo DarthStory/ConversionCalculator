@@ -37,16 +37,31 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    // To suppress warning about dynamically loading the jvm
+    tasks.withType<Test> {
+        jvmArgs("-XX:+EnableDynamicAgentLoading")
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.junit.junit)
+
+    // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+
+    // Testing
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // To fix an error
+    // SLF4J: No SLF4J providers were found.
+    // SLF4J: Defaulting to no-operation (NOP) logger implementation
+    implementation(libs.slf4j.simple)
 }

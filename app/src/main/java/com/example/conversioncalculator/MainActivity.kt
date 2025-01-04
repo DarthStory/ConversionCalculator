@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.conversioncalculator.databinding.ActivityMainBinding
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        val defaultColor = getColor(R.color.buttonDefault)
         val selectedColor = getColor(R.color.buttonSelected)
 
         // Input Unit Buttons
@@ -105,8 +105,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         val result = convertTemperature(inputValue, inputUnit, outputUnit)
-        binding.degreesOut.setText(result.toString())
-        Log.d("MainActivity", "Converted $inputValue $inputUnit to $result $outputUnit")
+
+        // Fix: Format with Locale for proper number formatting (US locale is 1.5, French locale is 1,5)
+        val formattedResult = String.format(Locale.getDefault(), "%.2f", result)
+        binding.degreesOut.setText(formattedResult)
+        Log.d("MainActivity", "Converted $inputValue $inputUnit to $formattedResult $outputUnit")
     }
 
     private fun convertTemperature(value: Double, fromUnit: String, toUnit: String): Double {
